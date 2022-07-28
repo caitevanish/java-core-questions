@@ -332,7 +332,48 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TO Write an implementation for this method declaration
-		return null;
+		String before = string.toLowerCase();	//grape
+		String temp = "";
+		String result = "";
+
+		for( int i = 0; i<before.length(); i++){
+			char test = before.charAt(i);
+
+			//yellow -> ellowyay
+			if(test == 'y'){
+				result = result + before.substring(1,before.length()) + test + "ay";
+				return result;
+			}
+
+			//therapy -> erapthay
+			else if(temp.equals("th")){
+				result = result + before.substring(2,before.length()) + temp + "ay";
+				return result;
+			}
+
+			//school -> oolschay
+			else if(temp.equals("sch")){
+				result = result + before.substring(3,before.length()) + temp + "ay";
+				return result;
+			}
+
+			//apple -> appleay
+			else if( test == 'a' || test == 'e' || test == 'i' || test == 'o' || test == 'u' ){
+				result = before + "ay";
+				return result;
+			}
+
+
+			else{
+				temp = temp + test;
+			}
+
+
+			//phrase
+		}
+
+
+		return result;
 	}
 
 	/**
