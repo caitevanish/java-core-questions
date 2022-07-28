@@ -35,11 +35,23 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-
-
-
 	public String acronym(String phrase) {
-		return null;
+		String aPhrase = phrase;        //save phrase in a variable
+		String tempWord = "";            //create a var to hold word temporarily
+		String result = "";                //variable to hold first letters
+		for (int i = 0; i < aPhrase.length(); i++) {
+			tempWord = tempWord + phrase.charAt(i);
+			if (aPhrase.charAt(i) == ' ' ||        //Checks for end of word
+					i == aPhrase.length() - 1 ||        //Checks for end of phrase
+					aPhrase.charAt(i) == '-') {    //Check for symbols
+				result = result + tempWord.toUpperCase().charAt(0);
+				tempWord = "";
+			}
+//			System.out.println(result);
+
+		}
+
+		return result;
 	}
 
 	/**
