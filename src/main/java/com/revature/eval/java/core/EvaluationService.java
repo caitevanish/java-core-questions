@@ -150,8 +150,46 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TO Write an implementation for this method declaration
+		//example "zoo"
+		String word = string.toUpperCase();
+		int score = 0;
+		for (int i = 0; i < word.length(); i++) {
+			switch (word.charAt(i)) {
+				default:
+					score += 1;
+					break;
+				case 'D':
+				case 'G':
+					score += 2;
+					break;
+				case 'B':
+				case 'C':
+				case 'M':
+				case 'P':
+					score += 3;
+					break;
+				case 'F':
+				case 'H':
+				case 'V':
+				case 'W':
+				case 'Y':
+					score += 4;
+					break;
+				case 'K':
+					score += 5;
+					break;
+				case 'J':
+				case 'X':
+					score += 8;
+					break;
+				case 'Q':
+				case 'Z':
+					score += 10;
+					break;
 
-		return 0;
+			}
+		}
+		return score;
 	}
 
 	/**
@@ -187,7 +225,12 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TO Write an implementation for this method declaration
-		return null;
+		String before = string;
+		String result = before.replaceAll("[^0-9+]", "");
+
+		//THROW EXCEPTION: expectedException.expect(IllegalArgumentException.class)
+
+		return result;
 	}
 
 	/**
