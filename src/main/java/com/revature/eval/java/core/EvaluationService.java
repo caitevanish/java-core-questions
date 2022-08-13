@@ -223,15 +223,19 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		// TO Write an implementation for this method declaration
-		String before = string;
-		String result = before.replaceAll("[^0-9+]", "");
+
+			public static String cleanPhoneNumber(String string) {
+				String before = string;
+				String result = before.replaceAll("[^0-9+]", "");
+
+				if(result.length() > 10|| result.contains("[^[a-zA-Z]+$]")){
+					throw new IllegalArgumentException("invalid number");
+				}
+				return result;
+			}
 
 		//THROW EXCEPTION: expectedException.expect(IllegalArgumentException.class)
 
-		return result;
-	}
 
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
@@ -244,8 +248,20 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
+		HashMap<String, Integer> wordCountMap = new HashMap<String,Integer>();
+			for(String word:string.split(" ")){
+				if(wordCountMap.containsKey(word)) {
+					wordCountMap.put(word, wordCountMap.get(word) + 1);
+				}
+				else{
+					wordCountMap.put(word,1);
+				}
+			}
+		return wordCountMap;
 
-		return null;
+		//Add to a new map
+		//iterate over each item; compare the current word to the list
+
 	}
 
 	/**
@@ -283,33 +299,68 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 *
 	 */
-	static class BinarySearch<T> implements Comparable<T> {
+	static class BinarySearch<T extends Comparable<T>>{
+		//CompareTO
+		// 1 2 3 4 5 6 7 8 9
 		private List<T> sortedList;
+		//constructor
+		public void setSortedList(List<T> sortedList) {
+			this.sortedList = sortedList;
+		}
+
 
 		public int indexOf(T t) {
-			// TO Write an implementation for this method declaration
-			return 0;
+
+			int i =0; 					// first index item
+			int j = sortedList.size();	// ie.7
+
+			while(i<=j) {
+				int midIndex = (i + j) / 2;		//0+7/2=3
+				T mid =sortedList.get(midIndex);//5
+				//operation compare
+					//.compare not function of list
+					//iterate function from the comparable
+				int comparison = t.compareTo(mid);//
+				//==0
+				if(comparison==0){
+					return midIndex;
+				}
+
+				//new mid-index
+				if (comparison < 0){	// ie. 2 < 5
+					//i = 0
+					j=midIndex-1;
+					//[1,2,3,4,5]
+				}
+				if(comparison>0){		//ie. 4 > 2
+					i=midIndex+1;
+					//j= sortedList.size()
+					//[3,4,5]
+				}
+			}
+			return -1;
 		}
+//					t=7
+//					[1,2,3,4,][5,6,7,8]
+
 
 		public BinarySearch(List<T> sortedList) {
 			super();
 			this.sortedList = sortedList;
 		}
-
+		//getter
 		public List<T> getSortedList() {
 			return sortedList;
 		}
 
-		public void setSortedList(List<T> sortedList) {
-			this.sortedList = sortedList;
-		}
 
-		@Override
-		public int compareTo(T arg0) {
-			// TODO Auto-generated method stub
-
-    		return 0;
-		}
+//		@Override
+//		public int compareTo(T arg0) {
+//			// TODO Auto-generated method stub
+//
+//
+//    		return 0;
+//		}
 
 	}
 
@@ -335,42 +386,43 @@ public class EvaluationService {
 		String before = string.toLowerCase();	//grape
 		String temp = "";
 		String result = "";
-
-		for( int i = 0; i<before.length(); i++){
+		//for(String word:string.split(" ")){
+		for( int i = 0; i<before.length(); i++) {
 			char test = before.charAt(i);
+			//test =test.split(" ")
+			//"quick" "fast" "run"
+			//test[0]=
+
 
 			//yellow -> ellowyay
-			if(test == 'y'){
-				result = result + before.substring(1,before.length()) + test + "ay";
+			if (test == 'y') {
+				result = result + before.substring(1, before.length()) + test + "ay";
 				return result;
 			}
 
 			//therapy -> erapthay
-			else if(temp.equals("th")){
-				result = result + before.substring(2,before.length()) + temp + "ay";
+			else if (temp.equals("th")) {
+				result = result + before.substring(2, before.length()) + temp + "ay";
 				return result;
 			}
 
 			//school -> oolschay
-			else if(temp.equals("sch")){
-				result = result + before.substring(3,before.length()) + temp + "ay";
+			else if (temp.equals("sch")) {
+				result = result + before.substring(3, before.length()) + temp + "ay";
 				return result;
 			}
 
 			//apple -> appleay
-			else if( test == 'a' || test == 'e' || test == 'i' || test == 'o' || test == 'u' ){
+			else if (test == 'a' || test == 'e' || test == 'i' || test == 'o' || test == 'u') {
 				result = before + "ay";
 				return result;
-			}
-
-
-			else{
+			} else {
 				temp = temp + test;
 			}
-
+		}
 
 			//phrase
-		}
+		//}
 
 
 		return result;
@@ -378,8 +430,8 @@ public class EvaluationService {
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
-	 * raised to the power 	 * 16. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
-of the number of digits.
+	 * raised to the power of the number of digits.
+	 *
 	 *
 	 * For example:
 	 *
@@ -394,7 +446,20 @@ of the number of digits.
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TO Write an implementation for this method declaration
-
+		String s =Integer.toString(input);
+		int var = s.length();
+		int sum =0;
+		int temp = input ;
+		//153 =153%10=3 153/10=15%10 =5 15/10=5%10=5
+		//num is less than deno , remain=num
+		while(temp!=0){
+			int r = temp%10;
+			sum = sum +(int)(Math.pow(r,var));
+			temp=temp/10;
+		}
+		if(sum ==input){
+			return true;
+		}
 		return false;
 	}
 
@@ -406,12 +471,15 @@ of the number of digits.
 	 * Note that 1 is not a prime number.
 	 *
 	 * @param l
-	 * @return
+	 * @return List
 	 */
+	//Find a
+
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TO Write an implementation for this method declaration
+		long test = l;
 
-  		return null;
+		return null;
 	}
 
 	/**
@@ -440,6 +508,10 @@ of the number of digits.
 	 * gur ynml qbt. ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. gives The
 	 * quick brown fox jumps over the lazy dog.
 	 */
+
+	//Check out the ascii values/table which are all right next to each other
+	//cast a chart into an int, becomes an ascii
+		//char is ascii representation of an int
 	static class RotationalCipher {
 		private int key;
 
