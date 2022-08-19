@@ -61,7 +61,6 @@ public class EvaluationService {
 	 * as having exactly two sides the same length, but for the purposes of this
 	 * exercise we'll say at least two.) A scalene triangle has all sides of
 	 * different lengths.
-	 *
 	 */
 	static class Triangle {
 		private double sideOne;
@@ -135,14 +134,14 @@ public class EvaluationService {
 
 	/**
 	 * 4. Given a word, compute the scrabble score for that word.
-	 *
+	 * <p>
 	 * --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
 	 * C, M, P = 3; F, H,sEquilateral V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
 	 * "cabbage" should be scored as worth 14 points:
-	 *
+	 * <p>
 	 * 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
 	 * point for E And to total:
-	 *
+	 * <p>
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 *
 	 * @param string
@@ -194,52 +193,52 @@ public class EvaluationService {
 
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
-	 *
+	 * <p>
 	 * The North American Numbering Plan (NANP) is a telephone numbering system used
 	 * by many countries in North America like the United States, Canada or Bermuda.
 	 * All NANP-countries share the same international country code: 1.
-	 *
+	 * <p>
 	 * NANP numbers are ten-digit numbers consisting of a three-digit Numbering Plan
 	 * Area code, commonly known as area code, followed by a seven-digit local
 	 * number. The first three digits of the local number represent the exchange
 	 * code, followed by the unique four-digit number which is the subscriber
 	 * number.
-	 *
+	 * <p>
 	 * The format is usually represented as
-	 *
+	 * <p>
 	 * 1 (NXX)-NXX-XXXX where N is any digit from 2 through 9 and X is any digit
 	 * from 0 through 9.
-	 *
+	 * <p>
 	 * Your task is to clean up differently formatted telephone numbers by removing
 	 * punctuation and the country code (1) if present.
-	 *
+	 * <p>
 	 * For example, the inputs
-	 *
+	 * <p>
 	 * +1 (613)-995-0253 613-995-0253 1 613 995 0253 613.995.0253 should all produce
 	 * the output
-	 *
+	 * <p>
 	 * 6139950253
-	 *
+	 * <p>
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 
-			public static String cleanPhoneNumber(String string) {
-				String before = string;
-				String result = before.replaceAll("[^0-9+]", "");
+	public static String cleanPhoneNumber(String string) {
+		String before = string;
+		String result = before.replaceAll("[^0-9+]", "");
 
-				if(result.length() > 10|| result.contains("[^[a-zA-Z]+$]")){
-					throw new IllegalArgumentException("invalid number");
-				}
-				return result;
-			}
+		if (result.length() > 10 || result.contains("[^[a-zA-Z]+$]")) {
+			throw new IllegalArgumentException("invalid number");
+		}
+		return result;
+	}
 
-		//THROW EXCEPTION: expectedException.expect(IllegalArgumentException.class)
+	//THROW EXCEPTION: expectedException.expect(IllegalArgumentException.class)
 
 
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
-	 *
+	 * <p>
 	 * For example for the input "olly olly in come free" olly: 2 in: 1 come: 1
 	 * free: 1
 	 *
@@ -248,15 +247,14 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		HashMap<String, Integer> wordCountMap = new HashMap<String,Integer>();
-			for(String word:string.split(" ")){
-				if(wordCountMap.containsKey(word)) {
-					wordCountMap.put(word, wordCountMap.get(word) + 1);
-				}
-				else{
-					wordCountMap.put(word,1);
-				}
+		HashMap<String, Integer> wordCountMap = new HashMap<String, Integer>();
+		for (String word : string.split(" ")) {
+			if (wordCountMap.containsKey(word)) {
+				wordCountMap.put(word, wordCountMap.get(word) + 1);
+			} else {
+				wordCountMap.put(word, 1);
 			}
+		}
 		return wordCountMap;
 
 		//Add to a new map
@@ -266,43 +264,43 @@ public class EvaluationService {
 
 	/**
 	 * 7. Implement a binary search algorithm.
-	 *
+	 * <p>
 	 * Searching a sorted collection is a common task. A dictionary is a sorted list
 	 * of word definitions. Given a word, one can find its definition. A telephone
 	 * book is a sorted list of people's names, addresses, and telephone numbers.
 	 * Knowing someone's name allows one to quickly find their telephone number and
 	 * address.
-	 *
+	 * <p>
 	 * If the list to be searched contains more than a few items (a dozen, say) a
 	 * binary search will require far fewer comparisons than a linear search, but it
 	 * imposes the requirement that the list be sorted.
-	 *
+	 * <p>
 	 * In computer science, a binary search or half-interval search algorithm finds
 	 * the position of a specified input value (the search "key") within an array
 	 * sorted by key value.
-	 *
+	 * <p>
 	 * In each step, the algorithm compares the search key value with the key value
 	 * of the middle element of the array.
-	 *
+	 * <p>
 	 * If the keys match, then a matching element has been found and its index, or
 	 * position, is returned.
-	 *
+	 * <p>
 	 * Otherwise, if the search key is less than the middle element's key, then the
 	 * algorithm repeats its action on the sub-array to the left of the middle
 	 * element or, if the search key is greater, on the sub-array to the right.
-	 *
+	 * <p>
 	 * If the remaining array to be searched is empty, then the key cannot be found
 	 * in the array and a special "not found" indication is returned.
-	 *
+	 * <p>
 	 * A binary search halves the number of items to check with each iteration, so
 	 * locating an item (or determining its absence) takes logarithmic time. A
 	 * binary search is a dichotomic divide and conquer search algorithm.
-	 *
 	 */
-	static class BinarySearch<T extends Comparable<T>>{
+	static class BinarySearch<T extends Comparable<T>> {
 		//CompareTO
 		// 1 2 3 4 5 6 7 8 9
 		private List<T> sortedList;
+
 		//constructor
 		public void setSortedList(List<T> sortedList) {
 			this.sortedList = sortedList;
@@ -311,29 +309,29 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 
-			int i =0; 					// first index item
-			int j = sortedList.size();	// ie.7
+			int i = 0;                    // first index item
+			int j = sortedList.size();    // ie.7
 
-			while(i<=j) {
-				int midIndex = (i + j) / 2;		//0+7/2=3
-				T mid =sortedList.get(midIndex);//5
+			while (i <= j) {
+				int midIndex = (i + j) / 2;        //0+7/2=3
+				T mid = sortedList.get(midIndex);//5
 				//operation compare
-					//.compare not function of list
-					//iterate function from the comparable
+				//.compare not function of list
+				//iterate function from the comparable
 				int comparison = t.compareTo(mid);//
 				//==0
-				if(comparison==0){
+				if (comparison == 0) {
 					return midIndex;
 				}
 
 				//new mid-index
-				if (comparison < 0){	// ie. 2 < 5
+				if (comparison < 0) {    // ie. 2 < 5
 					//i = 0
-					j=midIndex-1;
+					j = midIndex - 1;
 					//[1,2,3,4,5]
 				}
-				if(comparison>0){		//ie. 4 > 2
-					i=midIndex+1;
+				if (comparison > 0) {        //ie. 4 > 2
+					i = midIndex + 1;
 					//j= sortedList.size()
 					//[3,4,5]
 				}
@@ -348,6 +346,7 @@ public class EvaluationService {
 			super();
 			this.sortedList = sortedList;
 		}
+
 		//getter
 		public List<T> getSortedList() {
 			return sortedList;
@@ -366,67 +365,55 @@ public class EvaluationService {
 
 	/**
 	 * 8. Implement a program that translates from English to Pig Latin.
-	 *
+	 * <p>
 	 * Pig Latin is a made-up children's language that's intended to be confusing.
 	 * It obeys a few simple rules (below), but when it's spoken quickly it's really
 	 * difficult for non-children (and non-native speakers) to understand.
-	 *
+	 * <p>
 	 * Rule 1: If a word begins with a vowel sound, add an "ay" sound to the end of
 	 * the word. Rule 2: If a word begins with a consonant sound, move it to the end
 	 * of the word, and then add an "ay" sound to the end of the word. There are a
 	 * few more rules for edge cases, and there are regional variants too.
-	 *
+	 * <p>
 	 * See http://en.wikipedia.org/wiki/Pig_latin for more details.
 	 *
 	 * @param string
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TO Write an implementation for this method declaration
-		String before = string.toLowerCase();	//grape
-		String temp = "";
-		String result = "";
-		//for(String word:string.split(" ")){
-		for( int i = 0; i<before.length(); i++) {
-			char test = before.charAt(i);
-			//test =test.split(" ")
-			//"quick" "fast" "run"
-			//test[0]=
-
-
-			//yellow -> ellowyay
-			if (test == 'y') {
-				result = result + before.substring(1, before.length()) + test + "ay";
-				return result;
+// TO Write an implementation for this method declaration
+		StringBuilder results = new StringBuilder();
+		for (String phrase : string.toLowerCase().split(" ")) {
+			String result = "";
+			for(int i=0;i<phrase.length();i++) {
+				if (phrase.startsWith("y")) {
+					result = result + phrase.substring(1) + phrase.substring(0, 1) + "ay";
+					break;
+				}
+				if (phrase.startsWith("th")||phrase.startsWith("qu")) {
+					result = result + phrase.substring(2) + phrase.substring(0, 2) + "ay";
+					break;
+				}
+				if (phrase.startsWith("sch")) {
+					result = result + phrase.substring(3) + phrase.substring(0, 3) + "ay";
+					break;
+				}
+				else if (phrase.startsWith("a") || phrase.startsWith("e") || phrase.startsWith("i") || phrase.startsWith("o") || phrase.startsWith("u")) {
+					result = result + phrase +"ay";
+					break;
+				} else {
+					result = result + phrase.substring(1) + phrase.substring(0, 1) + "ay";
+					break;
+				}
 			}
+				results.append(result).append(" ");
+				//appleay
 
-			//therapy -> erapthay
-			else if (temp.equals("th")) {
-				result = result + before.substring(2, before.length()) + temp + "ay";
-				return result;
-			}
-
-			//school -> oolschay
-			else if (temp.equals("sch")) {
-				result = result + before.substring(3, before.length()) + temp + "ay";
-				return result;
-			}
-
-			//apple -> appleay
-			else if (test == 'a' || test == 'e' || test == 'i' || test == 'o' || test == 'u') {
-				result = before + "ay";
-				return result;
-			} else {
-				temp = temp + test;
-			}
 		}
-
-			//phrase
-		//}
-
-
-		return result;
+		return results.toString().trim();
 	}
+
+
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
@@ -478,8 +465,25 @@ public class EvaluationService {
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TO Write an implementation for this method declaration
 		long test = l;
-
-		return null;
+		List<Long> arrayList=new ArrayList<>();
+		//20--? 5 114 2*2 9 3
+		//20-->2
+		//200-->200/2-->100-->100/2-->50//25-->25
+		while(l%2==0){
+			arrayList.add((long)2);
+			l=l/2;
+		}
+		for(int i=3;i<=Math.sqrt(l);i=+2){
+			while(l%i==0){
+				//18-->18/2-->9-->3 -->3
+				l=l/i;
+			}
+			arrayList.add((long)i);
+		}
+		if(l>2){
+			arrayList.add((long)l);
+		}
+		return arrayList;
 	}
 
 	/**
@@ -513,6 +517,7 @@ public class EvaluationService {
 	//cast a chart into an int, becomes an ascii
 		//char is ascii representation of an int
 	static class RotationalCipher {
+		public static final String  a="abcdefghijklmnopqrstuvwxyz";
 		private int key;
 
 		public RotationalCipher(int key) {
@@ -522,7 +527,22 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TO Write an implementation for this method declaration
-			return null;
+			StringBuilder results=new StringBuilder();
+
+			for(String phrase:string.toLowerCase().split(" ")) {
+				String cipher = "";
+				for (int i = 0; i < phrase.length(); i++) {
+					int position = a.indexOf(phrase.charAt(i));
+					//l
+					//p
+					int keyValue = (key + position)%26;
+					//p
+					char replace = a.charAt(keyValue);
+					cipher = cipher + replace;
+				}
+				results.append(cipher).append(" ");
+			}
+			return results.toString().trim();
 		}
 
 	}

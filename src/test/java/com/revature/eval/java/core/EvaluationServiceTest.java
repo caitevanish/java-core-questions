@@ -393,6 +393,7 @@ public class EvaluationServiceTest {
 	public void testProductOfPrimes() {
 		assertEquals(Arrays.asList(5L, 17L, 23L, 461L), evaluationService.calculatePrimeFactorsOf(901255L));
 	}
+	//Heap error, out of memory
 
 	/*******************************************************************
 	 * Question 11
