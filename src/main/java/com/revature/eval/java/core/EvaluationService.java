@@ -560,9 +560,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TO Write an implementation for this method declaration
+		int count=0;
+		int n=1;
+		int j;
+		if(i ==0){
+			throw new IllegalArgumentException();
+		}
+		while(count<i) {
 
-		return 0;
+			n = n + 1;
+
+			for ( j = 2; j <= n; j++) {
+				if (n % j == 0) {
+					break;
+				}
+			}
+				if (j == n) {
+					count = count + 1;
+				}
+
+
+
+			// TO Write an implementation for this method declaration
+		}
+		return n;
 	}
 
 	/**
@@ -599,7 +620,23 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			// TO Write an implementation for this method declaration
-			return null;
+
+				StringBuilder ciper = new StringBuilder();
+
+				for (char ch : string.toLowerCase().toCharArray()) {
+					if (Character.isLetter(ch)) {
+						int newChar = ('z' - ch) + 'a';
+						ciper = ciper.append((char) newChar);
+					}
+
+				}
+			for(int i=0;i<ciper.length();i=i+6){
+				ciper=ciper.insert(i," ");
+
+			}
+
+				return ciper.toString().trim();
+
 		}
 
 		/**
@@ -610,9 +647,27 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			// TO Write an implementation for this method declaration
-			return null;
+			String ciper ="";
+
+			for (char ch : string.toLowerCase().toCharArray()) {
+				if(! Character.isLetter(ch)){
+					ciper=ciper+ch;
+				}
+				if (Character.isLetter(ch)) {
+					int newChar = ('z' - ch) + 'a';
+					ciper = ciper+((char) newChar);
+				}
+
+			}
+			for(int i=0;i<ciper.length();i++){
+				ciper=ciper.replace(" ","");
+
+			}
+
+			return ciper.toString().trim();
 		}
-	}
+
+		}
 
 	/**
 	 * 15. The ISBN-10 verification process is used to validate book identification
@@ -637,8 +692,31 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TO Write an implementation for this method declaration
+		// TO Write an iSplementation for this method declaration
+		int result =0;
+		string = string.replace("-","");
+		//int isin = Integer.parseInt(string);
+		for( int i =0;i<string.length();i++){
+			  if  (Character.isAlphabetic(i)) {
+				if(string.charAt(i)=='X'){
+					int digit =10;
+					result+=digit*(10-i);
+				}
+				else{
+					return false;
+
+				}
+			} else{
+				int digit=Character.getNumericValue(string.charAt(i));
+				result+=digit*(10-i);
+			}
+			  if(result%11==0){
+				  return true;
+			  }
+
+		}
 		return false;
+
 	}
 
 	/**
@@ -655,8 +733,17 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TO Write an implementation for this method declaration
-		return false;
+		// TO Write an implementation for this method
+		string =string.toLowerCase();
+		boolean present =true;
+		for(char ch='a';ch<='z';ch++){
+			if(! string.contains(String.valueOf(ch))) {
+				present = false;
+				break;
+			}
+		}
+
+		return present;
 	}
 
 	/**
@@ -667,7 +754,9 @@ public class EvaluationService {
 	 * @param given
 	 * @return
 	 */
-	public Temporal getGigasecondDate(Temporal given) {
+	public Temporal getGigasecondDate(  Temporal given){
+		//tmeporal ->month -date/date/time
+		//
 		// TO Write an implementation for this method declaration
 		return null;
 	}
